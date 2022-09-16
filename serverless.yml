@@ -1,10 +1,15 @@
 service: todoapp
 
 frameworkVersion: '3'
+useDotenv: true
 
 provider:
   name: aws
   runtime: nodejs16.x
+  region: us-east-2
+  deploymentPrefix: todoapp
+  deploymentBucket:
+    name: ${file(./env/variables.js):bucketName}
 
 functions:
   hello:
