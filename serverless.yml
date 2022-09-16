@@ -4,8 +4,16 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs16.x
 
 functions:
   hello:
     handler: handler.hello
+    events:
+      - httpApi:
+          method: GET
+          path: /hello
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
