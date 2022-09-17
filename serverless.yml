@@ -41,6 +41,13 @@ functions:
       - httpApi:
           method: GET
           path: /tasks
+  createTask:
+    name: CreateTask-lambda-${sls:stage}
+    handler: src/functions/createTask.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /tasks
 
 plugins:
   - serverless-esbuild
