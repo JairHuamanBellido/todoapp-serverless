@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.104",
+    "@types/uuid": "^8.3.4",
     "esbuild": "^0.15.7",
     "serverless-esbuild": "^1.32.8",
     "serverless-offline": "^10.0.2",
@@ -28,7 +29,8 @@
   "dependencies": {
     "aws-sdk": "^2.1218.0",
     "inversify": "^6.0.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "uuid": "^9.0.0"
   },
   "homepage": "https://github.com/JairHuamanBellido/todoapp-serverless#readme"
 }

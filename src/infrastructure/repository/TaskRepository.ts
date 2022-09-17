@@ -9,6 +9,7 @@ import { ITaskRepository } from './ITaskRepository.interface';
 
 @injectable()
 export class TaskRepository implements ITaskRepository {
+  private readonly tableName: string = 'todo';
   constructor(
     @inject(DynamoDBDITokens.DynamoDBConnection)
     private readonly dynamoDB: DynamoDBConnection
@@ -18,11 +19,20 @@ export class TaskRepository implements ITaskRepository {
     const dynamoTask: TaskDynamoDB[] = (await (
       await this.dynamoDB.connection
         .scan({
-          TableName: 'todo',
+          TableName: this.tableName,
         })
         .promise()
     ).Items) as unknown as TaskDynamoDB[];
 
     return TaskRepositoryMapper.toDomainEntites(dynamoTask);
+  }
+
+  async create(task: TaskDynamoDB): Promise<void> {
+    await this.dynamoDB.connection
+      .put({
+        TableName: this.tableName,
+        Item: task,
+      })
+      .promise();
   }
 }
