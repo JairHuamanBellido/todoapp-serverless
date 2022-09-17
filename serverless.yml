@@ -10,6 +10,12 @@ provider:
   deploymentPrefix: todoapp
   deploymentBucket:
     name: ${file(./env/variables.js):bucketName}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:*
 
 resources:
   Resources:
@@ -28,12 +34,13 @@ resources:
           WriteCapacityUnits: 1
 
 functions:
-  hello:
-    handler: handler.hello
+  getAllTask:
+    name: GetAllTask-lambda-${sls:stage}
+    handler: src/functions/getAllTasks.handler
     events:
       - httpApi:
           method: GET
-          path: /hello
+          path: /tasks
 
 plugins:
   - serverless-esbuild

@@ -25,6 +25,10 @@
     "serverless-plugin-typescript": "^2.1.2",
     "typescript": "^4.8.3"
   },
-  "dependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.1218.0",
+    "inversify": "^6.0.1",
+    "reflect-metadata": "^0.1.13"
+  },
   "homepage": "https://github.com/JairHuamanBellido/todoapp-serverless#readme"
 }
