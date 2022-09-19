@@ -35,4 +35,39 @@ export class TaskRepository implements ITaskRepository {
       })
       .promise();
   }
+
+  async update(task: TaskDynamoDB): Promise<boolean> {
+    const isTaskExist = await this.getById(task.id);
+
+    if (!isTaskExist) {
+      return false;
+    }
+    return !!(await this.dynamoDB.connection
+      .update({
+        TableName: this.tableName,
+        Key: {
+          id: task.id,
+        },
+        AttributeUpdates: {
+          title: { Value: task.title },
+          done: { Value: task.done },
+        },
+      })
+      .promise());
+  }
+
+  async getById(id: string): Promise<Task | undefined> {
+    const task = await (
+      await this.dynamoDB.connection
+        .get({
+          TableName: this.tableName,
+          Key: { id: id },
+        })
+        .promise()
+    ).Item;
+
+    return (
+      TaskRepositoryMapper.toDomainEntity(task as TaskDynamoDB) || undefined
+    );
+  }
 }
