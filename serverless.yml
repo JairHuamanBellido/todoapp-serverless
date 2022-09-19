@@ -48,6 +48,13 @@ functions:
       - httpApi:
           method: POST
           path: /tasks
+  updateTask:
+    name: UpdateTask-lambda-${sls:stage}
+    handler: src/functions/updateTask.handler
+    events:
+      - httpApi:
+          method: PUT
+          path: /tasks/{id}
 
 plugins:
   - serverless-esbuild
