@@ -70,4 +70,19 @@ export class TaskRepository implements ITaskRepository {
       TaskRepositoryMapper.toDomainEntity(task as TaskDynamoDB) || undefined
     );
   }
+
+  async delete(taskId: string): Promise<boolean> {
+    const isTaskExist = await this.getById(taskId);
+    if (!isTaskExist) {
+      return false;
+    }
+    return !!(await this.dynamoDB.connection
+      .delete({
+        TableName: this.tableName,
+        Key: {
+          id: taskId,
+        },
+      })
+      .promise());
+  }
 }
