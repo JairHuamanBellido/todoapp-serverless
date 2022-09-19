@@ -1,4 +1,5 @@
 import { CreateTaskService } from '../../domain/services/CreateTaskService';
+import { DeleteTaskService } from '../../domain/services/DeleteTaskService';
 import { GetAllTaskService } from '../../domain/services/GetAllTaskService';
 import { UpdateTaskService } from '../../domain/services/UpdateTaskService';
 import { container } from '../container/Container';
@@ -12,4 +13,12 @@ const CreateTaskProvider: CreateTaskService =
 const UpdateTaskProvider: UpdateTaskService =
   container.resolve<UpdateTaskService>(UpdateTaskService);
 
-export { GetAllTaskProvider, CreateTaskProvider, UpdateTaskProvider };
+const DeleteTaskProvider: DeleteTaskService =
+  container.resolve<DeleteTaskService>(DeleteTaskService);
+
+export {
+  GetAllTaskProvider,
+  CreateTaskProvider,
+  UpdateTaskProvider,
+  DeleteTaskProvider,
+};

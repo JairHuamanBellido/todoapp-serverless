@@ -55,6 +55,13 @@ functions:
       - httpApi:
           method: PUT
           path: /tasks/{id}
+  deleteTask:
+    name: DeleteTask-lambda-${sls:stage}
+    handler: src/functions/deleteTask.handler
+    events:
+      - httpApi:
+          method: DELETE
+          path: /tasks/{id}
 
 plugins:
   - serverless-esbuild
