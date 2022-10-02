@@ -16,6 +16,16 @@ provider:
         - dynamodb:*
       Resource:
         - arn:aws:dynamodb:*
+  httpApi:
+    cors:
+      allowedOrigins: '*'
+      allowedHeaders: '*'
+      allowedMethods:
+        - GET 
+        - POST
+        - PUT
+        - DELETE
+      
 
 resources:
   Resources:
